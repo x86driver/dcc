@@ -36,6 +36,7 @@ int main()
         printf("Doremi C Compiler #Build on %s\n", __TIMESTAMP__);
         ir_init();
         yyparse();
+        gen_code();
         return 0;
 }
 

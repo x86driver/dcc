@@ -29,7 +29,7 @@ int genir_assign(int num)
 	return 0;
 }
 
-int genir_done()
+void genir_done()
 {
 	*ir_type_ptr = END;
 	*ir_num_ptr = 0;
@@ -41,9 +41,15 @@ void ir_init()
 	ir_num_ptr = &ir_num_buf[0];
 }
 
+int reg_alloc()
+{
+    return 3;
+}
+
 void gen_mov_code(int num)
 {
-	
+	int reg = reg_alloc();  /* need argument? */
+    printf("mov r%d, #%d\n", reg, num);
 }
 
 void gen_asm_code(int type, int num)
@@ -58,9 +64,14 @@ void gen_asm_code(int type, int num)
 void gen_code()
 {
 	int type, num;
+
+    genir_done();
+    ir_type_ptr = &ir_type_buf[0];
+    ir_num_ptr = &ir_num_buf[0];
+
 	do {
 		type = *ir_type_ptr++;
-		num = *it_num_ptr++;
+		num = *ir_num_ptr++;
 		gen_asm_code(type, num);
 	} while (type != END);
 }

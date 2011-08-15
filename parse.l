@@ -27,4 +27,6 @@ int		{ return TYPE; }
 int yyerror(char *s)
 {
 	fprintf(stderr, "%d: %s at %s\n", lineno, s, yytext);
+
+    return 0;
 }
